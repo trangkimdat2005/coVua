@@ -32,9 +32,6 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="chot.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="xe.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -51,6 +48,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="quanCo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="chot.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
