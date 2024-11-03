@@ -1,7 +1,193 @@
 #pragma once
 #include "banCo.h"
 
-void nhapBC(quanCo* BC[][8]) {
+void nhapBC(quanCo *BC[][8]){
+    int n, x, z;
+    char ychar;
+    bool mau;
+    while (1){
+        cout << endl;
+        xuatBC(BC);
+        cout << "             +---------------+\n";
+        cout << "             |   Chon quan   |\n";
+        cout << "             |               |\n";
+        cout << "             |   1. Chot     |\n";
+        cout << "             |   2. Xe       |\n";
+        cout << "             |   3. Ma       |\n";
+        cout << "             |   4. Tuong    |\n";
+        cout << "             |   5. Hau      |\n";
+        cout << "             |   6. Vua      |\n";
+        cout << "             |   7. Xoa      |\n";
+        cout << "             |   0. Thoat    |\n";
+        cout << "             +---------------+\n\n";
+        cout << "             Lua chon cua ban: ";
+        cin >> n;
+        switch (n) {
+        case 1:
+
+            cout << "\n             +--------------+\n";
+            cout << "             |   Chon mau   |\n";
+            cout << "             |              |\n";
+            cout << "             |   1. Trang   |\n";
+            cout << "             |   2. Den     |\n";
+            cout << "             |   0. tro ve  |\n";
+            cout << "             +--------------+\n\n";
+            cout << "             Lua chon cua ban: ";
+            cin >> z;
+            if (z == 1) mau = 1;
+            else if (z == 2) mau = 0;
+            else break;
+            cout << endl;
+            cout << "             Chon o muon dat: ";
+            cin >> ychar >> x;
+            while (x < 1 || x > 8 || ychar < 'a' || ychar > 'h' || BC[x - 1][ychar - 97]->kiemTraQuanCo()){
+                cout << "\n             o ban chon khong nam trong ban co hoac da co quan co\n";
+                cout << "\n             Chon o muon dat: ";
+                cin >> ychar >> x;
+            }
+                BC[x - 1][ychar - 97] = new chot(mau);
+            break;
+
+        case 2:
+
+            cout << "\n             +--------------+\n";
+            cout << "             |   Chon mau   |\n";
+            cout << "             |              |\n";
+            cout << "             |   1. Trang   |\n";
+            cout << "             |   2. Den     |\n";
+            cout << "             |   0. tro ve  |\n";
+            cout << "             +--------------+\n\n";
+            cout << "             Lua chon cua ban: ";
+            cin >> z;
+            if (z == 1) mau = 1;
+            else if (z == 2) mau = 0;
+            else break;
+
+            cout << "             Chon o muon dat: ";
+            cin >> ychar >> x;
+            while (x < 1 || x > 8 || ychar < 'a' || ychar > 'h' || BC[x - 1][ychar - 97]->kiemTraQuanCo()) {
+                cout << "\n             o ban chon khong nam trong ban co hoac da co quan co\n";
+                cout << "\n             Chon o muon dat: ";
+                cin >> ychar >> x;
+            }
+                BC[x - 1][ychar - 97] = new xe(mau);
+            break;
+
+        case 3:
+
+            cout << "\n             +--------------+\n";
+            cout << "             |   Chon mau   |\n";
+            cout << "             |              |\n";
+            cout << "             |   1. Trang   |\n";
+            cout << "             |   2. Den     |\n";
+            cout << "             |   0. tro ve  |\n";
+            cout << "             +--------------+\n\n";
+            cout << "             Lua chon cua ban: ";
+            cin >> z;
+            if (z == 1) mau = 1;
+            else if (z == 2) mau = 0;
+            else break;
+
+            cout << "             Chon o muon dat: ";
+            cin >> ychar >> x;
+            while (x < 1 || x > 8 || ychar < 'a' || ychar > 'h' || BC[x - 1][ychar - 97]->kiemTraQuanCo()) {
+                cout << "\n             o ban chon khong nam trong ban co hoac da co quan co\n";
+                cout << "\n             Chon o muon dat: ";
+                cin >> ychar >> x;
+            }
+                BC[x - 1][ychar - 97] = new ma(mau);
+            break;
+
+        case 4:
+
+            cout << "\n             +--------------+\n";
+            cout << "             |   Chon mau   |\n";
+            cout << "             |              |\n";
+            cout << "             |   1. Trang   |\n";
+            cout << "             |   2. Den     |\n";
+            cout << "             |   0. tro ve  |\n";
+            cout << "             +--------------+\n\n";
+            cout << "             Lua chon cua ban: ";
+            cin >> z;
+            if (z == 1) mau = 1;
+            else if (z == 2) mau = 0;
+            else break;
+
+            cout << "             Chon o muon dat: ";
+            cin >> ychar >> x;
+            while (x < 1 || x > 8 || ychar < 'a' || ychar > 'h' || BC[x - 1][ychar - 97]->kiemTraQuanCo()) {
+                cout << "\n             o ban chon khong nam trong ban co hoac da co quan co\n";
+                cout << "\n             Chon o muon dat: ";
+                cin >> ychar >> x;
+            }
+                BC[x - 1][ychar - 97] = new tuong(mau);
+            break;
+
+        case 5:
+
+            cout << "\n             +--------------+\n";
+            cout << "             |   Chon mau   |\n";
+            cout << "             |              |\n";
+            cout << "             |   1. Trang   |\n";
+            cout << "             |   2. Den     |\n";
+            cout << "             |   0. tro ve  |\n";
+            cout << "             +--------------+\n\n";
+            cout << "             Lua chon cua ban: ";
+            cin >> z;
+            if (z == 1) mau = 1;
+            else if (z == 2) mau = 0;
+            else break;
+
+            cout << "             Chon o muon dat: ";
+            cin >> ychar >> x;
+            while (x < 1 || x > 8 || ychar < 'a' || ychar > 'h' || BC[x - 1][ychar - 97]->kiemTraQuanCo()) {
+                cout << "\n             o ban chon khong nam trong ban co hoac da co quan co\n";
+                cout << "\n             Chon o muon dat: ";
+                cin >> ychar >> x;
+            }
+                BC[x - 1][ychar - 97] = new hau(mau);
+            break;
+
+        case 6:
+
+            cout << "\n             +--------------+\n";
+            cout << "             |   Chon mau   |\n";
+            cout << "             |              |\n";
+            cout << "             |   1. Trang   |\n";
+            cout << "             |   2. Den     |\n";
+            cout << "             |   0. tro ve  |\n";
+            cout << "             +--------------+\n\n";
+            cout << "             Lua chon cua ban: ";
+            cin >> z;
+            if (z == 1) mau = 1;
+            else if (z == 2) mau = 0;
+            else break;
+
+            cout << "             Chon o muon dat: ";
+            cin >> ychar >> x;
+            while (x < 1 || x > 8 || ychar < 'a' || ychar > 'h' || BC[x - 1][ychar - 97]->kiemTraQuanCo()) {
+                cout << "\n             o ban chon khong nam trong ban co hoac da co quan co\n";
+                cout << "\n             Chon o muon dat: ";
+                cin >> ychar >> x;
+            }
+                BC[x - 1][ychar - 97] = new vua(mau);
+            break;
+
+        case 7:
+            cout << "\n             Chon o muon xoa: ";
+            cin >> ychar >> x;
+            if (x >= 1 && x <= 8 && ychar >= 'a' && ychar <= 'h' && BC[x - 1][ychar - 97]->kiemTraQuanCo())
+                BC[x - 1][ychar - 97] = NULL;
+            break;
+        case 0:
+            return;
+        default:
+            break;
+        }
+    }
+}
+
+void nhapBCMacDinh(quanCo* BC[][8]) {
     for (int i = 0; i < 8; i++) {
         BC[1][i] = new chot(1);
         BC[6][i] = new chot(0);
@@ -28,10 +214,10 @@ void nhapBC(quanCo* BC[][8]) {
 }
 
 void xuatBC(quanCo* BC[][8]) {
-    cout << "     a    b    c    d    e    f    g    h\n";
-    cout << "  +----+----+----+----+----+----+----+----+\n";
+    cout << "                  a    b    c    d    e    f    g    h\n";
+    cout << "               +----+----+----+----+----+----+----+----+\n";
     for (int i = 0; i < 8; i++) {
-        cout << i + 1 << " |";
+        cout << "             " << i + 1 << " |";
         for (int j = 0; j < 8; j++) {
             if (!BC[i][j])
                 cout << "    |";
@@ -43,9 +229,9 @@ void xuatBC(quanCo* BC[][8]) {
         }
         cout << " " << i + 1;
         cout << endl;
-        cout << "  +----+----+----+----+----+----+----+----+\n";
+        cout << "               +----+----+----+----+----+----+----+----+\n";
     }
-    cout << "     a    b    c    d    e    f    g    h\n";
+    cout << "                  a    b    c    d    e    f    g    h\n";
 }
 
 bool kiemTraAn(int x, int y, int xNew, int yNew, quanCo* BC[][8]) {
@@ -76,11 +262,11 @@ void nhapThanh(int x, int y, int xNew, int yNew, quanCo* BC[][8]){
 }
 
 void phong(int x, int y, int xNew, int yNew, quanCo* BC[][8]) {
-    cout << "moi ban chon quan muon phong\n";
-    cout << "1. hau\n";
-    cout << "2. xe\n";
-    cout << "3. ma\n";
-    cout << "4. tuong\n";
+    cout << "             moi ban chon quan muon phong\n";
+    cout << "             1. hau\n";
+    cout << "             2. xe\n";
+    cout << "             3. ma\n";
+    cout << "             4. tuong\n";
     int n;
     cin >> n;
     switch (n)
@@ -165,7 +351,7 @@ void diChuyen(int x, int y, int xNew, int yNew, quanCo* BC[][8]) {
         diChuyenVua(x, y, xNew, yNew, BC);
     }
     else
-        cout << "\nkhong the di chuyen\n";
+        cout << "\n             khong the di chuyen\n";
 }
 
 bool kiemTraNuocDiChot(int x, int y, int xNew, int yNew, quanCo* BC[][8]) {
@@ -221,7 +407,7 @@ void diChuyenChot(int x, int y, int xNew, int yNew, quanCo* BC[][8]) {
             setQuanCo(x, y, xNew, yNew, BC);
         }
     else
-        cout << "\nkhong the di chuyen\n";
+        cout << "\n             khong the di chuyen\n";
 }
 
 bool kiemTraNuocDiXe(int x, int y, int xNew, int yNew, quanCo* BC[][8]) {
@@ -250,7 +436,7 @@ void diChuyenXe(int x, int y, int xNew, int yNew, quanCo* BC[][8]) {
         setQuanCo(x, y, xNew, yNew, BC);
     }
     else
-        cout << "\nkhong the di chuyen\n";
+        cout << "\n             khong the di chuyen\n";
 }
 
 bool kiemTraNuocDiMa(int x, int y, int xNew, int yNew, quanCo* BC[][8]) {
@@ -271,7 +457,7 @@ void diChuyenMa(int x, int y, int xNew, int yNew, quanCo* BC[][8]) {
     if (kiemTraNuocDiMa(x, y, xNew, yNew, BC))
         setQuanCo(x, y, xNew, yNew, BC);
     else
-        cout << "\nkhong the di chuyen\n";
+        cout << "\n             khong the di chuyen\n";
 }
 
 bool kiemTraNuocDiTuong(int x, int y, int xNew, int yNew, quanCo* BC[][8]) {
@@ -301,7 +487,7 @@ void diChuyenTuong(int x, int y, int xNew, int yNew, quanCo* BC[][8]) {
     if (kiemTraNuocDiTuong(x, y, xNew, yNew, BC))
         setQuanCo(x, y, xNew, yNew, BC);
     else
-        cout << "\nkhong the di chuyen\n";
+        cout << "\n             khong the di chuyen\n";
 }
 
 bool kiemTraNuocDiHau(int x, int y, int xNew, int yNew, quanCo* BC[][8]) {
@@ -331,7 +517,7 @@ void diChuyenHau(int x, int y, int xNew, int yNew, quanCo* BC[][8]) {
     if (kiemTraNuocDiHau(x, y, xNew, yNew, BC))
         setQuanCo(x, y, xNew, yNew, BC);
     else
-        cout << "\nkhong the di chuyen\n";
+        cout << "\n             khong the di chuyen\n";
 }
 
 bool kiemTraNuocDiVua(int x, int y, int xNew, int yNew, quanCo* BC[][8]) {
@@ -367,7 +553,7 @@ void diChuyenVua(int x, int y, int xNew, int yNew, quanCo* BC[][8]) {
     else if (kiemTraNuocDiVua(x, y, xNew, yNew, BC) && kiemTraChieu(xNew,yNew,BC))
         setQuanCo(x, y, xNew, yNew, BC);
     else
-        cout << "\nkhong the di chuyen\n";
+        cout << "\n             khong the di chuyen\n";
 }
 
 bool kiemTraChieu(int x, int y, quanCo* BC[][8]) {

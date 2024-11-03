@@ -1,8 +1,8 @@
 #pragma once
 #include "quanCo.h"
 
-
 void nhapBC(quanCo* BC[][8]);
+void nhapBCMacDinh(quanCo* BC[][8]);
 void xuatBC(quanCo* BC[][8]);
 bool kiemTraAn(int x, int y, int xNew, int yNew, quanCo* BC[][8]);
 bool getMau(int x, int y, quanCo* BC[][8]);
