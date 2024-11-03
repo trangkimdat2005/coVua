@@ -120,7 +120,255 @@ void setQuanCo(int x, int y, int xNew, int yNew, quanCo* BC[][8]) {
     BC[x][y] = NULL;
 }
 
+bool kiemTraNuocDi(int x, int y, int xNew, int yNew, quanCo* BC[][8]) {
+    if (xNew >= 0 && xNew <= 7 && yNew >= 0 && yNew <= 7) {
+        if (BC[x][y]->getName() == 'C') {
+            return kiemTraNuocDiChot(x, y, xNew, yNew, BC);
+        }
+        if (BC[x][y]->getName() == 'X') {
+            return kiemTraNuocDiXe(x, y, xNew, yNew, BC);
+        }
+        if (BC[x][y]->getName() == 'M') {
+            return kiemTraNuocDiMa(x, y, xNew, yNew, BC);
+        }
+        if (BC[x][y]->getName() == 'T') {
+            return kiemTraNuocDiTuong(x, y, xNew, yNew, BC);
+        }
+        if (BC[x][y]->getName() == 'H') {
+            return kiemTraNuocDiHau(x, y, xNew, yNew, BC);
+        }
+        if (BC[x][y]->getName() == 'V') {
+            return kiemTraNuocDiVua(x, y, xNew, yNew, BC);
+        }
+        return 0;
+    }
+    else return 0;
+}
 
+void diChuyen(int x, int y, int xNew, int yNew, quanCo* BC[][8]) {
+    if (BC[x][y]->getName() == 'C') {
+        diChuyenChot(x, y, xNew, yNew, BC);
+    }
+    else if (BC[x][y]->getName() == 'X') {
+        diChuyenXe(x, y, xNew, yNew, BC);
+    }
+    else if (BC[x][y]->getName() == 'M') {
+        diChuyenMa(x, y, xNew, yNew, BC);
+    }
+    else if (BC[x][y]->getName() == 'T') {
+        diChuyenTuong(x, y, xNew, yNew, BC);
+    }
+    else if (BC[x][y]->getName() == 'H') {
+        diChuyenHau(x, y, xNew, yNew, BC);
+    }
+    else if (BC[x][y]->getName() == 'V') {
+        diChuyenVua(x, y, xNew, yNew, BC);
+    }
+    else
+        cout << "\nkhong the di chuyen\n";
+}
+
+bool kiemTraNuocDiChot(int x, int y, int xNew, int yNew, quanCo* BC[][8]) {
+    if (xNew >= 0 && xNew <= 7 && yNew >= 0 && yNew <= 7) {
+        int cnt = (getMau(x, y, BC)) ? 1 : -1;
+        //mau trang
+        if (getMau(x, y, BC)) {
+            if (xNew - x == 1 && y == yNew) {
+                if (getQuanCo(xNew, yNew, BC))
+                    return 0;
+            }
+            else if (xNew - x == 1 && abs(yNew - y) == 1) {
+                if (getQuanCo(xNew, yNew, BC) && getMau(x, y, BC) == getMau(xNew, yNew, BC))
+                    return 0;
+            }
+            else if (xNew - x == 2 && y == yNew && BC[x][y]->getA() == 0) {
+                if (getQuanCo(xNew, yNew, BC))
+                    return 0;
+            }
+            else return 0;
+        }
+        //mau den
+        else {
+            if (xNew - x == -1 && y == yNew) {
+                if (getQuanCo(xNew, yNew, BC))
+                    return 0;
+            }
+            else if (xNew - x == -1 && abs(yNew - y) == 1) {
+                if (getQuanCo(xNew, yNew, BC) && getMau(x, y, BC) == getMau(xNew, yNew, BC))
+                    return 0;
+            }
+            else if (xNew - x == -2 && y == yNew && BC[x][y]->getA() == 0) {
+                if (getQuanCo(xNew, yNew, BC))
+                    return 0;
+            }
+            else return 0;
+        }
+        return 1;
+    }
+    else return 0;
+}
+
+void diChuyenChot(int x, int y, int xNew, int yNew, quanCo* BC[][8]) {
+    if (BC[x][y]->getA() == 5 && kiemTraNuocDiChot(x, y, xNew, yNew, BC))
+        phong(x, y, xNew, yNew, BC);
+    else if (kiemTraNuocDiChot(x, y, xNew, yNew, BC))
+        if (abs(xNew - x) == 2) {
+            BC[x][y]->setA(2);
+            setQuanCo(x, y, xNew, yNew, BC);
+        }
+        else {
+            BC[x][y]->setA(1);
+            setQuanCo(x, y, xNew, yNew, BC);
+        }
+    else
+        cout << "\nkhong the di chuyen\n";
+}
+
+bool kiemTraNuocDiXe(int x, int y, int xNew, int yNew, quanCo* BC[][8]) {
+    if (xNew >= 0 && xNew <= 7 && yNew >= 0 && yNew <= 7) {
+        int c = (xNew > x) ? 1 : (xNew < x) ? -1 : 0;
+        int b = (yNew > y) ? 1 : (yNew < y) ? -1 : 0;
+        int i = x + c, j = y + b;
+        while (i != xNew || j != yNew) {
+            if (getQuanCo(i, j, BC))
+                return 0;
+            i += c;
+            j += b;
+        }
+        if (getQuanCo(xNew, yNew, BC))
+            if (getMau(x, y, BC) != getMau(xNew, yNew, BC));
+            else return 0;
+        BC[x][y]->setA(1);
+        return 1;
+    }
+    else return 0;
+}
+
+void diChuyenXe(int x, int y, int xNew, int yNew, quanCo* BC[][8]) {
+    if (kiemTraNuocDiXe(x, y, xNew, yNew, BC)) {
+        BC[x][y]->setA(1);
+        setQuanCo(x, y, xNew, yNew, BC);
+    }
+    else
+        cout << "\nkhong the di chuyen\n";
+}
+
+bool kiemTraNuocDiMa(int x, int y, int xNew, int yNew, quanCo* BC[][8]) {
+    if (xNew >= 0 && xNew <= 7 && yNew >= 0 && yNew <= 7) {
+        if ((abs(xNew - x) == 1 && abs(yNew - y) == 2) || (abs(xNew - x) == 2 && abs(yNew - y) == 1)) {
+            if (getQuanCo(xNew, yNew, BC))
+                if (getMau(x, y, BC) != getMau(xNew, yNew, BC))
+                    return 1;
+                else return 0;
+            else return 1;
+        }
+        else return 0;
+    }
+    else return 0;
+}
+
+void diChuyenMa(int x, int y, int xNew, int yNew, quanCo* BC[][8]) {
+    if (kiemTraNuocDiMa(x, y, xNew, yNew, BC))
+        setQuanCo(x, y, xNew, yNew, BC);
+    else
+        cout << "\nkhong the di chuyen\n";
+}
+
+bool kiemTraNuocDiTuong(int x, int y, int xNew, int yNew, quanCo* BC[][8]) {
+    if (xNew >= 0 && xNew <= 7 && yNew >= 0 && yNew <= 7) {
+        if (abs(x - xNew) == abs(y - yNew)) {
+            int a = (xNew > x) ? 1 : -1;
+            int b = (yNew > y) ? 1 : -1;
+            int i = x + a, j = y + b;
+            while (xNew != i) {
+                if (getQuanCo(i, j, BC))
+                    return 0;
+                i += a;
+                j += b;
+            }
+            if (getQuanCo(xNew, yNew, BC))
+                if (getMau(x, y, BC) != getMau(xNew, yNew, BC))
+                    return 1;
+                else return 0;
+            else return 1;
+        }
+        else return 0;
+    }
+    else return 0;
+}
+
+void diChuyenTuong(int x, int y, int xNew, int yNew, quanCo* BC[][8]) {
+    if (kiemTraNuocDiTuong(x, y, xNew, yNew, BC))
+        setQuanCo(x, y, xNew, yNew, BC);
+    else
+        cout << "\nkhong the di chuyen\n";
+}
+
+bool kiemTraNuocDiHau(int x, int y, int xNew, int yNew, quanCo* BC[][8]) {
+    if (xNew >= 0 && xNew <= 7 && yNew >= 0 && yNew <= 7) {
+        if (x == xNew || y == yNew || abs(x - xNew) == abs(y - yNew)) {
+            int a = (xNew > x) ? 1 : (xNew < x) ? -1 : 0;
+            int b = (yNew > y) ? 1 : (yNew < y) ? -1 : 0;
+            int i = x + a, j = y + b;
+            while (i != xNew || j != yNew) {
+                if (getQuanCo(i, j, BC))
+                    return 0;
+                i += a;
+                j += b;
+            }
+            if (getQuanCo(xNew, yNew, BC))
+                if (getMau(x, y, BC) != getMau(xNew, yNew, BC))
+                    return 1;
+                else return 0;
+            else return 1;
+        }
+        else return 0;
+    }
+    else return 0;
+}
+
+void diChuyenHau(int x, int y, int xNew, int yNew, quanCo* BC[][8]) {
+    if (kiemTraNuocDiHau(x, y, xNew, yNew, BC))
+        setQuanCo(x, y, xNew, yNew, BC);
+    else
+        cout << "\nkhong the di chuyen\n";
+}
+
+bool kiemTraNuocDiVua(int x, int y, int xNew, int yNew, quanCo* BC[][8]) {
+    if (xNew >= 0 && xNew <= 7 && yNew >= 0 && yNew <= 7) {
+        if (abs(xNew - x) <= 1 && abs(y - yNew) <= 1) {
+            if (getQuanCo(xNew, yNew, BC))
+                if (getMau(x, y, BC) == getMau(xNew, yNew, BC))
+                    return 0;
+        }
+        else if ((BC[x][y]->getA() == 0) && abs(y - yNew) == 2 && xNew - x == 0)
+            if (yNew < y && !getQuanCo(xNew, yNew, BC) && BC[x][0]->getA() == 0) {
+                for (int i = y - 1; i > 0; i--)
+                    if (getQuanCo(x, i, BC))
+                        return 0;
+            }
+            else if (yNew > y && !getQuanCo(xNew, yNew, BC) && BC[x][7]->getA() == 0) {
+                for (int i = y + 1; i < 7; i++)
+                    if (getQuanCo(x, i, BC))
+                        return 0;
+            }
+            else return 0;
+        else return 0;
+        return 1;
+    }
+    else return 0;
+}
+
+void diChuyenVua(int x, int y, int xNew, int yNew, quanCo* BC[][8]) {
+    if (abs(yNew - y) == 2 && kiemTraNuocDiVua(x, y, xNew, yNew, BC) && kiemTraChieu(xNew, yNew, BC) && kiemTraChieu(x, y, BC)) {
+        BC[x][y]->setA(1);
+        nhapThanh(x, y, xNew, yNew, BC);
+    }
+    else if (kiemTraNuocDiVua(x, y, xNew, yNew, BC) && kiemTraChieu(xNew,yNew,BC))
+        setQuanCo(x, y, xNew, yNew, BC);
+    else
+        cout << "\nkhong the di chuyen\n";
+}
 
 bool kiemTraChieu(int x, int y, quanCo* BC[][8]) {
     // Tren
