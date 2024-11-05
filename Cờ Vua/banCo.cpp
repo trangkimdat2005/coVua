@@ -224,8 +224,12 @@ void xuatBC(quanCo* BC[][8]) {
             else
                 if (BC[i][j]->kiemTraMau())
                     cout << " " << BC[i][j]->getName() << "t |";
-                else
-                    cout << " " << BC[i][j]->getName() << "d |";
+                else{
+                    setColor(8);
+                    cout << " " << BC[i][j]->getName() << "d ";
+                    setColor(15);
+                    cout << "|";
+                }
         }
         cout << " " << i + 1;
         cout << endl;
@@ -740,3 +744,23 @@ bool kiemTraChieuXungQuanh(int x, int y, quanCo* BC[][8]) {
     }
     return 1;
 }
+
+void timVua(int &xv, int &yv, bool luot, quanCo* BC[][8]) {
+    for (int i = 0; i < 8; i++) {
+        for (int j = 0; j < 8; j++) {
+            if (BC[i][j]) {
+                if (BC[i][j]->getName() == 'V' && BC[i][j]->kiemTraMau() == luot) {
+                    xv = i;
+                    yv = j;
+                    return;
+                }
+            }
+        }
+    }
+}
+
+void setColor(int color) {
+    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+    SetConsoleTextAttribute(hConsole, color);
+}
+

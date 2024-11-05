@@ -2,131 +2,195 @@
 
 int main() {
 
-	int m;
-	quanCo* BC[8][8] = {NULL};
+	int m, x, xNew, xv, yv;
+	char y, yNew;
+	bool luot = 1;
+	quanCo* BC[8][8] = { NULL };
+	
 	do {
-		cout <<"             +---------------------------+\n";
-		cout <<"             |           Option          |\n";
-		cout <<"             |                           |\n";
-		cout <<"             |   1. Ban co tu thiet ke   |\n";
-		cout <<"             |   2. Ban co mac dinh      |\n";
-		cout <<"             +---------------------------+\n\n";
-		cout <<"             Lua chon cua ban: ";
+		cout << "             +---------------------------+\n";
+		cout << "             |           Option          |\n";
+		cout << "             |                           |\n";
+		cout << "             |   1. Ban co tu thiet ke   |\n";
+		cout << "             |   2. Ban co mac dinh      |\n";
+		cout << "             +---------------------------+\n\n";
+		cout << "             Lua chon cua ban: ";
 		cin >> m;
 	} while (m != 1 && m != 2);
+	
 	if (m == 1)nhapBC(BC);
 	else if (m == 2)nhapBCMacDinh(BC);
 	xuatBC(BC);
-	int n = 1, x, y, xNew, yNew, xv, yv;
-	char ychar;
-	bool luot = 1;
-	while (n) {
-		for (int i = 0; i < 8; i++) {
-			for (int j = 0; j < 8; j++) {
-				if (BC[i][j]) {
-					if (BC[i][j]->getName() == 'V' && BC[i][j]->kiemTraMau() == luot) {
-						xv = i;
-						yv = j;
-						if (!kiemTraChieu(i, j, BC)) {
-							if (kiemTraChieuXungQuanh(i, j, BC)) {
-								if (luot){
-									cout << "             Quan trang thua";
-									n = 0;
-									break;
-								}
-								else{
-									cout << "             Quan den thua";
-									n = 0;
-									break;
-								}
-							}
+
+	while (1){
+	
+		cout << "moi ban chon quan muon di chuyen: ";
+		cin >> y >> x;
+		y -= 97;
+		x--;
+
+		while (x < 0 || x > 7 || y < 0 || y > 7) {
+			cout << "noi ban chon da nam ngoai ban co\n";
+			cout << "moi ban chon lai quan muon di chuyen: ";
+			cin >> y >> x;
+			y -= 97;
+			x--;
+		}
+
+		while (!BC[x][y]) {
+			cout << "noi ban chon khong co quan co\n";
+			cout << "moi ban chon lai quan muon di chuyen: ";
+			cin >> y >> x;
+			y -= 97;
+			x--;
+		}
+
+		while (BC[x][y]->kiemTraMau() != luot) {
+			(luot) ? cout << "hien tai la luot cua quan trang\n" : cout << "hien tai la luot cua quan den\n";
+			cout << "moi ban chon lai quan muon di chuyen: ";
+			cin >> y >> x;
+			y -= 97;
+			x--;
+		}
+
+		cout << "moi ban chon noi muon di chuyen: ";
+		cin >> yNew >> xNew;
+		yNew -= 97;
+		xNew--;
+
+		while (xNew < 0 || xNew > 7 || yNew < 0 || yNew > 7) {
+			cout << "noi ban chon da nam ngoai ban co\n";
+			cout << "moi ban chon lai noi muon di chuyen: ";
+			cin >> yNew >> xNew;
+			yNew -= 97;
+			xNew--;
+		}
+
+		timVua(xv, yv, luot, BC);
+
+		if (!kiemTraChieu(xv, yv, BC)){
+
+			quanCo* A = NULL;
+
+			while (!kiemTraChieu(xv, yv, BC)) {
+
+				if (kiemTraNuocDi(x, y, xNew, yNew, BC)) {
+					A = BC[xNew][yNew];
+					BC[xNew][yNew] = BC[x][y];
+					BC[x][y] = NULL;
+					
+					if (!kiemTraChieu(xv, yv, BC)) {
+						BC[x][y] = BC[xNew][yNew];
+						BC[xNew][yNew] = A;
+						A = NULL;
+
+						cout << "quan vua cua ban dang bi chieu\n";
+
+						cout << "moi ban chon lai quan muon di chuyen: ";
+						cin >> y >> x;
+						y -= 97;
+						x--;
+
+						while (x < 0 || x > 7 || y < 0 || y > 7) {
+							cout << "noi ban chon da nam ngoai ban co\n";
+							cout << "moi ban chon lai quan muon di chuyen: ";
+							cin >> y >> x;
+							y -= 97;
+							x--;
 						}
+
+						while (!BC[x][y]) {
+							cout << "noi ban chon khong co quan co\n";
+							cout << "moi ban chon lai quan muon di chuyen: ";
+							cin >> y >> x;
+							y -= 97;
+							x--;
+						}
+
+						while (BC[x][y]->kiemTraMau() != luot) {
+							(luot) ? cout << "hien tai la luot cua quan trang\n" : cout << "hien tai la luot cua quan den\n";
+							cout << "moi ban chon lai quan muon di chuyen: ";
+							cin >> y >> x;
+							y -= 97;
+							x--;
+						}
+
+						cout << "moi ban chon noi muon di chuyen: ";
+						cin >> yNew >> xNew;
+						yNew -= 97;
+						xNew--;
+
+						while (xNew < 0 || xNew > 7 || yNew < 0 || yNew > 7) {
+							cout << "noi ban chon da nam ngoai ban co\n";
+							cout << "moi ban chon lai noi muon di chuyen: ";
+							cin >> yNew >> xNew;
+							yNew -= 97;
+							xNew--;
+						}
+
 					}
-				}
-			}
-		}
-		cout <<"\n             moi ban chon quan: ";
-		cin >> ychar >> x;
-		y = ychar - 97;
-		while (!getQuanCo(x-1, y, BC)) {
-			cout <<"\n             noi ban chon khong co quan co\n";
-			cout <<"\n             moi ban chon quan: ";
-			cin >> ychar >> x;
-			y = ychar - 97;
-		}
-		while (x < 1 || x > 8 || ychar < 'a' || ychar > 'h') {
-			cout <<"\n             noi ban chon da nam ngoai ban co\n";
-			cout <<"\n             moi ban chon quan: ";
-			cin >> ychar >> x;
-			y = ychar - 97;
-		}
-		while (getMau(x-1, y, BC) != luot) {
-			if (luot) {
-				cout <<"\n             hien tai la luot cua quan trang\n";
-				cout <<"\n             moi ban chon quan: ";
-				cin >> ychar >> x;
-				y = ychar - 97;
-			}
-			else {
-				cout <<"\n             hien tai la luot cua quan den\n";
-				cout <<"\n             moi ban chon quan: ";
-				cin >> ychar >> x;
-				y = ychar - 97;
-			}
-		}
-		cout <<"\n             moi ban chon noi muon di chuyen: ";
-		cin >> ychar >> xNew;
-		yNew = ychar - 97;
-		diChuyen(x-1, y, xNew-1, yNew, BC);
-		while (!kiemTraChieu(xv, yv, BC)) {
-			setQuanCo(xNew-1, yNew, x-1, y, BC);
-			cout <<"\n             vua cua ban dang bi chieu\n";
-			cout <<"\n             moi ban chon quan: ";
-			cin >> ychar >> x;
-			y = ychar - 97;
-			while (!getQuanCo(x-1, y, BC)) {
-				cout <<"\n             noi ban chon khong co quan co\n";
-				cout <<"\n             moi ban chon quan: ";
-				cin >> ychar >> x;
-				y = ychar - 97;
-			}
-			while (x < 1 || x > 8 || ychar < 'a' || ychar > 'h') {
-				cout << "\n             noi ban chon da nam ngoai ban co\n";
-				cout << "\n             moi ban chon quan: ";
-				cin >> ychar >> x;
-				y = ychar - 97;
-			}
-			while (getMau(x-1, y, BC) != luot) {
-				if (luot) {
-					cout <<"\n             hien tai la luot cua quan trang\n";
-					cout <<"\n             moi ban chon quan: ";
-					cin >> ychar >> x;
-					y = ychar - 97;
 				}
 				else {
-					cout <<"\n             hien tai la luot cua quan den\n";
-					cout <<"\n             moi ban chon quan: ";
-					cin >> ychar >> x;
-					y = ychar - 97;
-				}
-			}
-			cout <<"\n             moi ban chon noi muon di chuyen: ";
-			cin >> ychar >> xNew;
-			yNew = ychar - 97;
-			diChuyen(x-1, y, xNew, yNew, BC);
-			for (int i = 0; i < 8; i++) {
-				for (int j = 0; j < 8; j++) {
-					if (BC[i][j]) {
-						if (BC[i][j]->getName() == 'V' && BC[i][j]->kiemTraMau() == luot) {
-							xv = i;
-							yv = j;
-						}
+					cout << "quan vua cua ban dang bi chieu\n";
+
+					cout << "moi ban chon lai quan muon di chuyen: ";
+					cin >> y >> x;
+					y -= 97;
+					x--;
+
+					while (x < 0 || x > 7 || y < 0 || y > 7) {
+						cout << "noi ban chon da nam ngoai ban co\n";
+						cout << "moi ban chon lai quan muon di chuyen: ";
+						cin >> y >> x;
+						y -= 97;
+						x--;
 					}
+
+					while (!BC[x][y]) {
+						cout << "noi ban chon khong co quan co\n";
+						cout << "moi ban chon lai quan muon di chuyen: ";
+						cin >> y >> x;
+						y -= 97;
+						x--;
+					}
+
+					while (BC[x][y]->kiemTraMau() != luot) {
+						(luot) ? cout << "hien tai la luot cua quan trang\n" : cout << "hien tai la luot cua quan den\n";
+						cout << "moi ban chon lai quan muon di chuyen: ";
+						cin >> y >> x;
+						y -= 97;
+						x--;
+					}
+
+					cout << "moi ban chon noi muon di chuyen: ";
+					cin >> yNew >> xNew;
+					yNew -= 97;
+					xNew--;
+
+					while (xNew < 0 || xNew > 7 || yNew < 0 || yNew > 7) {
+						cout << "noi ban chon da nam ngoai ban co\n";
+						cout << "moi ban chon lai noi muon di chuyen: ";
+						cin >> yNew >> xNew;
+						yNew -= 97;
+						xNew--;
+					}
+
 				}
 			}
+			BC[x][y] = BC[xNew][yNew];
+			BC[xNew][yNew] = A;
+			A = NULL;
 		}
+
+		diChuyen(x, y, xNew, yNew, BC);
+
 		xuatBC(BC);
-		if (!BC[x-1][y]->kiemTraQuanCo())
+
+		if (!BC[x][y]->kiemTraQuanCo())
 			luot = (luot) ? 0 : 1;
+	
 	}
+
+	return 0;
+
 }
