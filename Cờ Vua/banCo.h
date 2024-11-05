@@ -26,3 +26,6 @@ void diChuyenHau(int x, int y, int xNew, int yNew, quanCo* BC[][8]);
 void diChuyenVua(int x, int y, int xNew, int yNew, quanCo* BC[][8]);
 bool kiemTraChieu(int x, int y, quanCo* BC[][8]);
 bool kiemTraChieuXungQuanh(int x, int y, quanCo* BC[][8]);
+bool kiemTraChieuBi(int x, int y, quanCo* BC[][8]);
+void timVua(int& xv, int& yv, bool luot, quanCo* BC[][8]);
+void setColor(int color);
