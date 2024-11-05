@@ -273,25 +273,25 @@ void phong(int x, int y, int xNew, int yNew, quanCo* BC[][8]) {
     {
     case 1:
         delete BC[xNew][yNew];
-        BC[xNew][yNew] = new hau(getMau(x, y, BC));
+        BC[xNew][yNew] = new hau(BC[x][y]->kiemTraMau());
         delete BC[x][y];
         BC[x][y] = NULL;
         break;
     case 2:
         delete BC[xNew][yNew];
-        BC[xNew][yNew] = new xe(getMau(x, y, BC));
+        BC[xNew][yNew] = new xe(BC[x][y]->kiemTraMau());
         delete BC[x][y];
         BC[x][y] = NULL;
         break;
     case 3:
         delete BC[xNew][yNew];
-        BC[xNew][yNew] = new ma(getMau(x, y, BC));
+        BC[xNew][yNew] = new ma(BC[x][y]->kiemTraMau());
         delete BC[x][y];
         BC[x][y] = NULL;
         break;
     case 4:
         delete BC[xNew][yNew];
-        BC[xNew][yNew] = new tuong(getMau(x, y, BC));
+        BC[xNew][yNew] = new tuong(BC[x][y]->kiemTraMau());
         delete BC[x][y];
         BC[x][y] = NULL;
         break;
@@ -356,19 +356,19 @@ void diChuyen(int x, int y, int xNew, int yNew, quanCo* BC[][8]) {
 
 bool kiemTraNuocDiChot(int x, int y, int xNew, int yNew, quanCo* BC[][8]) {
     if (xNew >= 0 && xNew <= 7 && yNew >= 0 && yNew <= 7) {
-        int cnt = (getMau(x, y, BC)) ? 1 : -1;
+        int cnt = (BC[x][y]->kiemTraMau()) ? 1 : -1;
         //mau trang
-        if (getMau(x, y, BC)) {
+        if (BC[x][y]->kiemTraMau()) {
             if (xNew - x == 1 && y == yNew) {
-                if (getQuanCo(xNew, yNew, BC))
+                if (BC[xNew][yNew]->kiemTraQuanCo())
                     return 0;
             }
             else if (xNew - x == 1 && abs(yNew - y) == 1) {
-                if (getQuanCo(xNew, yNew, BC) && getMau(x, y, BC) == getMau(xNew, yNew, BC))
+                if (BC[xNew][yNew]->kiemTraQuanCo() && BC[x][y]->kiemTraMau() == BC[xNew][yNew]->kiemTraMau())
                     return 0;
             }
             else if (xNew - x == 2 && y == yNew && BC[x][y]->getA() == 0) {
-                if (getQuanCo(xNew, yNew, BC))
+                if (BC[xNew][yNew]->kiemTraQuanCo())
                     return 0;
             }
             else return 0;
@@ -376,15 +376,15 @@ bool kiemTraNuocDiChot(int x, int y, int xNew, int yNew, quanCo* BC[][8]) {
         //mau den
         else {
             if (xNew - x == -1 && y == yNew) {
-                if (getQuanCo(xNew, yNew, BC))
+                if (BC[xNew][yNew]->kiemTraQuanCo())
                     return 0;
             }
             else if (xNew - x == -1 && abs(yNew - y) == 1) {
-                if (getQuanCo(xNew, yNew, BC) && getMau(x, y, BC) == getMau(xNew, yNew, BC))
+                if (BC[xNew][yNew]->kiemTraQuanCo() && BC[x][y]->kiemTraMau() == BC[xNew][yNew]->kiemTraMau())
                     return 0;
             }
             else if (xNew - x == -2 && y == yNew && BC[x][y]->getA() == 0) {
-                if (getQuanCo(xNew, yNew, BC))
+                if (BC[xNew][yNew]->kiemTraQuanCo())
                     return 0;
             }
             else return 0;
@@ -421,8 +421,8 @@ bool kiemTraNuocDiXe(int x, int y, int xNew, int yNew, quanCo* BC[][8]) {
             i += c;
             j += b;
         }
-        if (getQuanCo(xNew, yNew, BC))
-            if (getMau(x, y, BC) != getMau(xNew, yNew, BC));
+        if (BC[xNew][yNew]->kiemTraQuanCo())
+            if (BC[x][y]->kiemTraMau() != BC[xNew][yNew]->kiemTraMau());
             else return 0;
         BC[x][y]->setA(1);
         return 1;
@@ -442,8 +442,8 @@ void diChuyenXe(int x, int y, int xNew, int yNew, quanCo* BC[][8]) {
 bool kiemTraNuocDiMa(int x, int y, int xNew, int yNew, quanCo* BC[][8]) {
     if (xNew >= 0 && xNew <= 7 && yNew >= 0 && yNew <= 7) {
         if ((abs(xNew - x) == 1 && abs(yNew - y) == 2) || (abs(xNew - x) == 2 && abs(yNew - y) == 1)) {
-            if (getQuanCo(xNew, yNew, BC))
-                if (getMau(x, y, BC) != getMau(xNew, yNew, BC))
+            if (BC[xNew][yNew]->kiemTraQuanCo())
+                if (BC[x][y]->kiemTraMau() != BC[xNew][yNew]->kiemTraMau())
                     return 1;
                 else return 0;
             else return 1;
@@ -472,8 +472,8 @@ bool kiemTraNuocDiTuong(int x, int y, int xNew, int yNew, quanCo* BC[][8]) {
                 i += a;
                 j += b;
             }
-            if (getQuanCo(xNew, yNew, BC))
-                if (getMau(x, y, BC) != getMau(xNew, yNew, BC))
+            if (BC[xNew][yNew]->kiemTraQuanCo())
+                if (BC[x][y]->kiemTraMau() != BC[xNew][yNew]->kiemTraMau())
                     return 1;
                 else return 0;
             else return 1;
@@ -502,8 +502,8 @@ bool kiemTraNuocDiHau(int x, int y, int xNew, int yNew, quanCo* BC[][8]) {
                 i += a;
                 j += b;
             }
-            if (getQuanCo(xNew, yNew, BC))
-                if (getMau(x, y, BC) != getMau(xNew, yNew, BC))
+            if (BC[xNew][yNew]->kiemTraQuanCo())
+                if (BC[x][y]->kiemTraMau() != BC[xNew][yNew]->kiemTraMau())
                     return 1;
                 else return 0;
             else return 1;
@@ -523,17 +523,17 @@ void diChuyenHau(int x, int y, int xNew, int yNew, quanCo* BC[][8]) {
 bool kiemTraNuocDiVua(int x, int y, int xNew, int yNew, quanCo* BC[][8]) {
     if (xNew >= 0 && xNew <= 7 && yNew >= 0 && yNew <= 7) {
         if (abs(xNew - x) <= 1 && abs(y - yNew) <= 1) {
-            if (getQuanCo(xNew, yNew, BC))
-                if (getMau(x, y, BC) == getMau(xNew, yNew, BC))
+            if (BC[xNew][yNew]->kiemTraQuanCo())
+                if (BC[x][y]->kiemTraMau() == BC[xNew][yNew]->kiemTraMau())
                     return 0;
         }
         else if ((BC[x][y]->getA() == 0) && abs(y - yNew) == 2 && xNew - x == 0)
-            if (yNew < y && !getQuanCo(xNew, yNew, BC) && BC[x][0]->getA() == 0) {
+            if (yNew < y && !BC[xNew][yNew]->kiemTraQuanCo() && BC[x][0]->getA() == 0) {
                 for (int i = y - 1; i > 0; i--)
                     if (getQuanCo(x, i, BC))
                         return 0;
             }
-            else if (yNew > y && !getQuanCo(xNew, yNew, BC) && BC[x][7]->getA() == 0) {
+            else if (yNew > y && !BC[xNew][yNew]->kiemTraQuanCo() && BC[x][7]->getA() == 0) {
                 for (int i = y + 1; i < 7; i++)
                     if (getQuanCo(x, i, BC))
                         return 0;
@@ -720,11 +720,22 @@ bool kiemTraChieuXungQuanh(int x, int y, quanCo* BC[][8]) {
         int newY = y + dy[i];
 
         if (newX >= 0 && newX <= 7 && newY >= 0 && newY <= 7) {
-            if (kiemTraChieu(newX, newY, BC) && !BC[newX][newY]->kiemTraQuanCo())
+            quanCo* B = BC[newX][newY];
+            BC[newX][newY] = BC[x][y];
+            if (kiemTraChieu(newX, newY, BC) && !BC[newX][newY]->kiemTraQuanCo()){
+                BC[newX][newY] = B;
+                delete B;
                 return 0;
+            }
             else if (kiemTraChieu(newX, newY, BC) && BC[newX][newY]->kiemTraQuanCo())
-                if (BC[newX][newY]->kiemTraMau() != BC[x][y]->kiemTraMau())
+                if (BC[newX][newY]->kiemTraMau() != BC[x][y]->kiemTraMau()){
+                    BC[newX][newY] = B;
+                    delete B;
                     return 0;
+                }
+            BC[newX][newY] = B;
+            delete B;
+            return 0;
         }
     }
     return 1;

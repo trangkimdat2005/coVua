@@ -29,9 +29,16 @@ int main() {
 						yv = j;
 						if (!kiemTraChieu(i, j, BC)) {
 							if (kiemTraChieuXungQuanh(i, j, BC)) {
-								cout <<"\n/n             Thua";
-								n = 0;
-								break;
+								if (luot){
+									cout << "             Quan trang thua";
+									n = 0;
+									break;
+								}
+								else{
+									cout << "             Quan den thua";
+									n = 0;
+									break;
+								}
 							}
 						}
 					}
@@ -83,6 +90,12 @@ int main() {
 				cin >> ychar >> x;
 				y = ychar - 97;
 			}
+			while (x < 1 || x > 8 || ychar < 'a' || ychar > 'h') {
+				cout << "\n             noi ban chon da nam ngoai ban co\n";
+				cout << "\n             moi ban chon quan: ";
+				cin >> ychar >> x;
+				y = ychar - 97;
+			}
 			while (getMau(x-1, y, BC) != luot) {
 				if (luot) {
 					cout <<"\n             hien tai la luot cua quan trang\n";
@@ -101,9 +114,19 @@ int main() {
 			cin >> ychar >> xNew;
 			yNew = ychar - 97;
 			diChuyen(x-1, y, xNew, yNew, BC);
+			for (int i = 0; i < 8; i++) {
+				for (int j = 0; j < 8; j++) {
+					if (BC[i][j]) {
+						if (BC[i][j]->getName() == 'V' && BC[i][j]->kiemTraMau() == luot) {
+							xv = i;
+							yv = j;
+						}
+					}
+				}
+			}
 		}
-		xuatBC(BC); 
-		if (!getQuanCo(x-1,y,BC))
+		xuatBC(BC);
+		if (!BC[x-1][y]->kiemTraQuanCo())
 			luot = (luot) ? 0 : 1;
 	}
 }
