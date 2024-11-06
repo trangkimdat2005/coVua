@@ -16,6 +16,7 @@ int main() {
 		cout << "             +---------------------------+\n\n";
 		cout << "             Lua chon cua ban: ";
 		cin >> m;
+		cout << endl;
 	} while (m != 1 && m != 2);
 	
 	if (m == 1)nhapBC(BC);
@@ -24,43 +25,43 @@ int main() {
 
 	while (1){
 	
-		cout << "moi ban chon quan muon di chuyen: ";
+		cout << "\nmoi ban chon quan muon di chuyen: ";
 		cin >> y >> x;
 		y -= 97;
 		x--;
 
 		while (x < 0 || x > 7 || y < 0 || y > 7) {
-			cout << "noi ban chon da nam ngoai ban co\n";
-			cout << "moi ban chon lai quan muon di chuyen: ";
+			cout << "\nnoi ban chon da nam ngoai ban co\n";
+			cout << "\nmoi ban chon lai quan muon di chuyen: ";
 			cin >> y >> x;
 			y -= 97;
 			x--;
 		}
 
 		while (!BC[x][y]) {
-			cout << "noi ban chon khong co quan co\n";
-			cout << "moi ban chon lai quan muon di chuyen: ";
+			cout << "\nnoi ban chon khong co quan co\n";
+			cout << "\nmoi ban chon lai quan muon di chuyen: ";
 			cin >> y >> x;
 			y -= 97;
 			x--;
 		}
 
 		while (BC[x][y]->kiemTraMau() != luot) {
-			(luot) ? cout << "hien tai la luot cua quan trang\n" : cout << "hien tai la luot cua quan den\n";
-			cout << "moi ban chon lai quan muon di chuyen: ";
+			(luot) ? cout << "\nhien tai la luot cua quan trang\n" : cout << "\nhien tai la luot cua quan den\n";
+			cout << "\nmoi ban chon lai quan muon di chuyen: ";
 			cin >> y >> x;
 			y -= 97;
 			x--;
 		}
 
-		cout << "moi ban chon noi muon di chuyen: ";
+		cout << "\nmoi ban chon noi muon di chuyen: ";
 		cin >> yNew >> xNew;
 		yNew -= 97;
 		xNew--;
 
 		while (xNew < 0 || xNew > 7 || yNew < 0 || yNew > 7) {
-			cout << "noi ban chon da nam ngoai ban co\n";
-			cout << "moi ban chon lai noi muon di chuyen: ";
+			cout << "\nnoi ban chon da nam ngoai ban co\n";
+			cout << "\nmoi ban chon lai noi muon di chuyen: ";
 			cin >> yNew >> xNew;
 			yNew -= 97;
 			xNew--;
@@ -84,45 +85,45 @@ int main() {
 						BC[xNew][yNew] = A;
 						A = NULL;
 
-						cout << "quan vua cua ban dang bi chieu\n";
+						cout << "\nquan vua cua ban dang bi chieu\n";
 
-						cout << "moi ban chon lai quan muon di chuyen: ";
+						cout << "\nmoi ban chon lai quan muon di chuyen: ";
 						cin >> y >> x;
 						y -= 97;
 						x--;
 
 						while (x < 0 || x > 7 || y < 0 || y > 7) {
-							cout << "noi ban chon da nam ngoai ban co\n";
-							cout << "moi ban chon lai quan muon di chuyen: ";
+							cout << "\nnoi ban chon da nam ngoai ban co\n";
+							cout << "\nmoi ban chon lai quan muon di chuyen: ";
 							cin >> y >> x;
 							y -= 97;
 							x--;
 						}
 
 						while (!BC[x][y]) {
-							cout << "noi ban chon khong co quan co\n";
-							cout << "moi ban chon lai quan muon di chuyen: ";
+							cout << "\nnoi ban chon khong co quan co\n";
+							cout << "\nmoi ban chon lai quan muon di chuyen: ";
 							cin >> y >> x;
 							y -= 97;
 							x--;
 						}
 
 						while (BC[x][y]->kiemTraMau() != luot) {
-							(luot) ? cout << "hien tai la luot cua quan trang\n" : cout << "hien tai la luot cua quan den\n";
-							cout << "moi ban chon lai quan muon di chuyen: ";
+							(luot) ? cout << "\nhien tai la luot cua quan trang\n" : cout << "\nhien tai la luot cua quan den\n";
+							cout << "\nmoi ban chon lai quan muon di chuyen: ";
 							cin >> y >> x;
 							y -= 97;
 							x--;
 						}
 
-						cout << "moi ban chon noi muon di chuyen: ";
+						cout << "\nmoi ban chon noi muon di chuyen: ";
 						cin >> yNew >> xNew;
 						yNew -= 97;
 						xNew--;
 
 						while (xNew < 0 || xNew > 7 || yNew < 0 || yNew > 7) {
-							cout << "noi ban chon da nam ngoai ban co\n";
-							cout << "moi ban chon lai noi muon di chuyen: ";
+							cout << "\nnoi ban chon da nam ngoai ban co\n";
+							cout << "\nmoi ban chon lai noi muon di chuyen: ";
 							cin >> yNew >> xNew;
 							yNew -= 97;
 							xNew--;
@@ -131,45 +132,45 @@ int main() {
 					}
 				}
 				else {
-					cout << "quan vua cua ban dang bi chieu\n";
+					cout << "\nquan vua cua ban dang bi chieu\n";
 
-					cout << "moi ban chon lai quan muon di chuyen: ";
+					cout << "\nmoi ban chon lai quan muon di chuyen: ";
 					cin >> y >> x;
 					y -= 97;
 					x--;
 
 					while (x < 0 || x > 7 || y < 0 || y > 7) {
-						cout << "noi ban chon da nam ngoai ban co\n";
-						cout << "moi ban chon lai quan muon di chuyen: ";
+						cout << "\nnoi ban chon da nam ngoai ban co\n";
+						cout << "\nmoi ban chon lai quan muon di chuyen: ";
 						cin >> y >> x;
 						y -= 97;
 						x--;
 					}
 
 					while (!BC[x][y]) {
-						cout << "noi ban chon khong co quan co\n";
-						cout << "moi ban chon lai quan muon di chuyen: ";
+						cout << "\nnoi ban chon khong co quan co\n";
+						cout << "\nmoi ban chon lai quan muon di chuyen: ";
 						cin >> y >> x;
 						y -= 97;
 						x--;
 					}
 
 					while (BC[x][y]->kiemTraMau() != luot) {
-						(luot) ? cout << "hien tai la luot cua quan trang\n" : cout << "hien tai la luot cua quan den\n";
-						cout << "moi ban chon lai quan muon di chuyen: ";
+						(luot) ? cout << "\nhien tai la luot cua quan trang\n" : cout << "\nhien tai la luot cua quan den\n";
+						cout << "\nmoi ban chon lai quan muon di chuyen: ";
 						cin >> y >> x;
 						y -= 97;
 						x--;
 					}
 
-					cout << "moi ban chon noi muon di chuyen: ";
+					cout << "\nmoi ban chon noi muon di chuyen: ";
 					cin >> yNew >> xNew;
 					yNew -= 97;
 					xNew--;
 
 					while (xNew < 0 || xNew > 7 || yNew < 0 || yNew > 7) {
-						cout << "noi ban chon da nam ngoai ban co\n";
-						cout << "moi ban chon lai noi muon di chuyen: ";
+						cout << "\nnoi ban chon da nam ngoai ban co\n";
+						cout << "\nmoi ban chon lai noi muon di chuyen: ";
 						cin >> yNew >> xNew;
 						yNew -= 97;
 						xNew--;

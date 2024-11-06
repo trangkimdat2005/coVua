@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "banCo.h"
 
 void nhapBC(quanCo *BC[][8]){
@@ -214,28 +214,51 @@ void nhapBCMacDinh(quanCo* BC[][8]) {
 }
 
 void xuatBC(quanCo* BC[][8]) {
-    cout << "                  a    b    c    d    e    f    g    h\n";
-    cout << "               +----+----+----+----+----+----+----+----+\n";
+    bool a = 1;
+    cout << "\n     a    b    c    d    e    f    g    h\n";
     for (int i = 0; i < 8; i++) {
-        cout << "             " << i + 1 << " |";
+
+        cout << "   ";
         for (int j = 0; j < 8; j++) {
+            (a) ? setConsoleBackgroundColor(10) : setConsoleBackgroundColor(14);
+            a = !a;
+            cout << "     ";
+        }
+        setConsoleBackgroundColor(0);
+        cout << endl;
+
+        cout << " " << i + 1 << " ";
+        for (int j = 0; j < 8; j++) {
+            (a) ? setConsoleBackgroundColor(10) : setConsoleBackgroundColor(14);
+            a = !a;
             if (!BC[i][j])
-                cout << "    |";
+                cout << "     ";
             else
-                if (BC[i][j]->kiemTraMau())
-                    cout << " " << BC[i][j]->getName() << "t |";
+                if (BC[i][j]->kiemTraMau()){
+                    setConsoleTextColor(12);
+                    cout << "  " << BC[i][j]->getName() << "  ";
+                }
                 else{
-                    setColor(8);
-                    cout << " " << BC[i][j]->getName() << "d ";
-                    setColor(15);
-                    cout << "|";
+                    setConsoleTextColor(0);
+                    cout << "  " << BC[i][j]->getName() << "  ";
+                    setConsoleTextColor(15);
                 }
         }
+        setConsoleBackgroundColor(0);
         cout << " " << i + 1;
         cout << endl;
-        cout << "               +----+----+----+----+----+----+----+----+\n";
+
+        cout << "   ";
+        for (int j = 0; j < 8; j++) {
+            (a) ? setConsoleBackgroundColor(10) : setConsoleBackgroundColor(14);
+            a = !a;
+            cout << "     ";
+        }
+        cout << endl;
+        a = (a) ? 0 : 1;
+        setConsoleBackgroundColor(0);
     }
-    cout << "                  a    b    c    d    e    f    g    h\n";
+    cout << "     a    b    c    d    e    f    g    h\n";
 }
 
 bool kiemTraAn(int x, int y, int xNew, int yNew, quanCo* BC[][8]) {
@@ -759,8 +782,75 @@ void timVua(int &xv, int &yv, bool luot, quanCo* BC[][8]) {
     }
 }
 
-void setColor(int color) {
+void setConsoleBackgroundColor(int background) {
     HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-    SetConsoleTextAttribute(hConsole, color);
+    CONSOLE_SCREEN_BUFFER_INFO consoleInfo;
+    GetConsoleScreenBufferInfo(hConsole, &consoleInfo);
+    int newColor = (background << 4) | (consoleInfo.wAttributes & 0x0F);
+    SetConsoleTextAttribute(hConsole, newColor);
 }
 
+void setConsoleTextColor(int text) {
+    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+    CONSOLE_SCREEN_BUFFER_INFO consoleInfo;
+    GetConsoleScreenBufferInfo(hConsole, &consoleInfo);
+    int newColor = (consoleInfo.wAttributes & 0xF0) | text;
+    SetConsoleTextAttribute(hConsole, newColor);
+}
+
+void setConsoleFontSize(int fontSize) {
+    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+    CONSOLE_FONT_INFOEX fontInfo;
+    fontInfo.cbSize = sizeof(fontInfo);
+    GetCurrentConsoleFontEx(hConsole, FALSE, &fontInfo);
+    fontInfo.dwFontSize.Y = fontSize;
+    SetCurrentConsoleFontEx(hConsole, FALSE, &fontInfo);
+}
+
+void setConsoleIcon(const wchar_t* iconPath) {
+    HICON hIcon = (HICON)LoadImage(NULL, iconPath, IMAGE_ICON, 0, 0, LR_LOADFROMFILE | LR_DEFAULTSIZE | LR_SHARED);
+
+    if (hIcon) {
+        HWND hwndConsole = GetConsoleWindow();
+
+        // Gửi thông điệp WM_SETICON để đặt icon lớn và nhỏ cho cửa sổ console
+        SendMessage(hwndConsole, WM_SETICON, ICON_BIG, (LPARAM)hIcon); // Đặt icon lớn
+        SendMessage(hwndConsole, WM_SETICON, ICON_SMALL, (LPARAM)hIcon); // Đặt icon nhỏ
+    }
+    else {
+        std::cerr << "Không thể tải icon từ đường dẫn: " << iconPath << std::endl;
+    }
+}
+
+void SetConsoleHeight(int height) {
+    HWND consoleWindow = GetConsoleWindow();
+    RECT r;
+    GetWindowRect(consoleWindow, &r);
+    int width = r.right - r.left; // Lấy chiều rộng hiện tại
+
+    // Thay đổi kích thước cửa sổ console
+    MoveWindow(consoleWindow, r.left, r.top, width, height, TRUE);
+}
+
+void SetWindowSize(SHORT width, SHORT height)
+{
+    HANDLE hStdout = GetStdHandle(STD_OUTPUT_HANDLE);
+    SMALL_RECT WindowSize;
+    WindowSize.Top = 0;
+    WindowSize.Left = 0;
+    WindowSize.Bottom = height;
+    WindowSize.Right = width;
+
+    SetConsoleWindowInfo(hStdout, 1, &WindowSize);
+}
+
+void SetScreenBufferSize(SHORT width, SHORT height)
+{
+    HANDLE hStdout = GetStdHandle(STD_OUTPUT_HANDLE);
+
+    COORD NewSize;
+    NewSize.X = width;
+    NewSize.Y = height;
+
+    SetConsoleScreenBufferSize(hStdout, NewSize);
+}
