@@ -1,1 +1,7 @@
-﻿  Cờ Vua.vcxproj -> D:\code\Cờ Vua - version 12\x64\Debug\Cờ Vua.exe
+﻿  banCo.cpp
+D:\code\Cờ Vua - version 13\Cờ Vua\banCo.cpp(804,22): warning C4566: character represented by universal-character-name '\u1EC3' cannot be represented in the current code page (1258)
+D:\code\Cờ Vua - version 13\Cờ Vua\banCo.cpp(804,22): warning C4566: character represented by universal-character-name '\u1EA3' cannot be represented in the current code page (1258)
+D:\code\Cờ Vua - version 13\Cờ Vua\banCo.cpp(804,22): warning C4566: character represented by universal-character-name '\u1EEB' cannot be represented in the current code page (1258)
+D:\code\Cờ Vua - version 13\Cờ Vua\banCo.cpp(804,22): warning C4566: character represented by universal-character-name '\u1EDD' cannot be represented in the current code page (1258)
+D:\code\Cờ Vua - version 13\Cờ Vua\banCo.cpp(804,22): warning C4566: character represented by universal-character-name '\u1EAB' cannot be represented in the current code page (1258)
+  Cờ Vua.vcxproj -> D:\code\Cờ Vua - version 13\x64\Debug\Cờ Vua.exe

@@ -215,50 +215,33 @@ void nhapBCMacDinh(quanCo* BC[][8]) {
 
 void xuatBC(quanCo* BC[][8]) {
     bool a = 1;
-    cout << "\n     a    b    c    d    e    f    g    h\n";
+    cout << "\n    a  b  c  d  e  f  g  h\n";
     for (int i = 0; i < 8; i++) {
-
-        cout << "   ";
-        for (int j = 0; j < 8; j++) {
-            (a) ? setConsoleBackgroundColor(10) : setConsoleBackgroundColor(14);
-            a = !a;
-            cout << "     ";
-        }
-        setConsoleBackgroundColor(0);
-        cout << endl;
 
         cout << " " << i + 1 << " ";
         for (int j = 0; j < 8; j++) {
             (a) ? setConsoleBackgroundColor(10) : setConsoleBackgroundColor(14);
             a = !a;
             if (!BC[i][j])
-                cout << "     ";
+                cout << "   ";
             else
                 if (BC[i][j]->kiemTraMau()){
                     setConsoleTextColor(12);
-                    cout << "  " << BC[i][j]->getName() << "  ";
+                    cout << " " << BC[i][j]->getName() << " ";
+                    setConsoleTextColor(15);
                 }
                 else{
                     setConsoleTextColor(0);
-                    cout << "  " << BC[i][j]->getName() << "  ";
+                    cout << " " << BC[i][j]->getName() << " ";
                     setConsoleTextColor(15);
                 }
         }
         setConsoleBackgroundColor(0);
         cout << " " << i + 1;
         cout << endl;
-
-        cout << "   ";
-        for (int j = 0; j < 8; j++) {
-            (a) ? setConsoleBackgroundColor(10) : setConsoleBackgroundColor(14);
-            a = !a;
-            cout << "     ";
-        }
-        cout << endl;
         a = (a) ? 0 : 1;
-        setConsoleBackgroundColor(0);
     }
-    cout << "     a    b    c    d    e    f    g    h\n";
+    cout << "    a  b  c  d  e  f  g  h\n";
 }
 
 bool kiemTraAn(int x, int y, int xNew, int yNew, quanCo* BC[][8]) {
