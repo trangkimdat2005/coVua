@@ -2,12 +2,12 @@
 #include "banCo.h"
 
 void nhapBC(quanCo *BC[][8]){
-    int n, x, z;
+    int n, x, z ,v = 0, m;
     char ychar;
     bool mau;
     while (1){
-        cout << endl;
         xuatBC(BC);
+        cout << endl;
         cout << "             +---------------+\n";
         cout << "             |   Chon quan   |\n";
         cout << "             |               |\n";
@@ -38,6 +38,8 @@ void nhapBC(quanCo *BC[][8]){
             else if (z == 2) mau = 0;
             else break;
             cout << endl;
+            xuatBC(BC);
+            cout << endl;
             cout << "             Chon o muon dat: ";
             cin >> ychar >> x;
             while (x < 1 || x > 8 || ychar < 'a' || ychar > 'h' || BC[x - 1][ychar - 97]->kiemTraQuanCo()){
@@ -62,6 +64,8 @@ void nhapBC(quanCo *BC[][8]){
             if (z == 1) mau = 1;
             else if (z == 2) mau = 0;
             else break;
+            cout << endl;
+            xuatBC(BC);
 
             cout << "             Chon o muon dat: ";
             cin >> ychar >> x;
@@ -87,6 +91,8 @@ void nhapBC(quanCo *BC[][8]){
             if (z == 1) mau = 1;
             else if (z == 2) mau = 0;
             else break;
+            cout << endl;
+            xuatBC(BC);
 
             cout << "             Chon o muon dat: ";
             cin >> ychar >> x;
@@ -112,6 +118,8 @@ void nhapBC(quanCo *BC[][8]){
             if (z == 1) mau = 1;
             else if (z == 2) mau = 0;
             else break;
+            cout << endl;
+            xuatBC(BC);
 
             cout << "             Chon o muon dat: ";
             cin >> ychar >> x;
@@ -137,6 +145,8 @@ void nhapBC(quanCo *BC[][8]){
             if (z == 1) mau = 1;
             else if (z == 2) mau = 0;
             else break;
+            cout << endl;
+            xuatBC(BC);
 
             cout << "             Chon o muon dat: ";
             cin >> ychar >> x;
@@ -149,7 +159,10 @@ void nhapBC(quanCo *BC[][8]){
             break;
 
         case 6:
-
+            if (v == 2) {
+                cout << "\n      Da dat so luong quan vua toi da\n";
+                break;
+            }
             cout << "\n             +--------------+\n";
             cout << "             |   Chon mau   |\n";
             cout << "             |              |\n";
@@ -162,7 +175,13 @@ void nhapBC(quanCo *BC[][8]){
             if (z == 1) mau = 1;
             else if (z == 2) mau = 0;
             else break;
-
+            cout << endl;
+            xuatBC(BC);
+            if (v == 1 && z == m) {
+                cout << "\n        da co quan vua "; (mau) ? cout << "trang\n" : cout << "den\n";
+                break;
+            }
+                m = z;
             cout << "             Chon o muon dat: ";
             cin >> ychar >> x;
             while (x < 1 || x > 8 || ychar < 'a' || ychar > 'h' || BC[x - 1][ychar - 97]->kiemTraQuanCo()) {
@@ -171,15 +190,36 @@ void nhapBC(quanCo *BC[][8]){
                 cin >> ychar >> x;
             }
                 BC[x - 1][ychar - 97] = new vua(mau);
+                v++;
             break;
 
         case 7:
+            cout << endl;
+            xuatBC(BC);
             cout << "\n             Chon o muon xoa: ";
             cin >> ychar >> x;
-            if (x >= 1 && x <= 8 && ychar >= 'a' && ychar <= 'h' && BC[x - 1][ychar - 97]->kiemTraQuanCo())
+            if (x >= 1 && x <= 8 && ychar >= 'a' && ychar <= 'h' && BC[x - 1][ychar - 97]->kiemTraQuanCo()){
+                if (!BC[x - 1][ychar - 97]) {
+                    cout << "\nkhong co quan co de xoa\n";
+                    break;
+                }
+                delete BC[x - 1][ychar - 97];
                 BC[x - 1][ychar - 97] = NULL;
+            }
             break;
         case 0:
+            if (v == 0) {
+                cout << "\nKhong co ca vua trang va vua den\n";
+                break;
+            }
+            else if (v == 1 && mau) {
+                cout << "\nCon thieu vua den\n";
+                break;
+            }
+            else if (v == 1 && !mau) {
+                cout << "\nCon thieu vua trang\n";
+                break;
+            }
             return;
         default:
             break;
@@ -310,6 +350,12 @@ void phong(int x, int y, int xNew, int yNew, quanCo* BC[][8]) {
     }
 }
 
+void batChotQuaDuong(int x, int y, int xNew, int yNew, quanCo* BC[][8]) {
+    setQuanCo(x, y, xNew, yNew, BC);
+    delete BC[x][yNew];
+    BC[x][yNew] = NULL;
+}
+
 void setQuanCo(int x, int y, int xNew, int yNew, quanCo* BC[][8]) {
     delete BC[xNew][yNew];
     BC[xNew][yNew] = BC[x][y];
@@ -374,7 +420,9 @@ bool kiemTraNuocDiChot(int x, int y, int xNew, int yNew, quanCo* BC[][8]) {
                     return 0;
             }
             else if (xNew - x == 1 && abs(yNew - y) == 1) {
-                if (BC[xNew][yNew]->kiemTraQuanCo() && BC[x][y]->kiemTraMau() == BC[xNew][yNew]->kiemTraMau())
+                if (x == 4 && BC[x][yNew]->kiemTraQuanCo() && BC[x][yNew]->getName() == 'C' && BC[x][yNew]->getA() == 1)
+                return 1;
+                else if (!BC[xNew][yNew]->kiemTraQuanCo() || BC[xNew][yNew]->kiemTraMau())
                     return 0;
             }
             else if (xNew - x == 2 && y == yNew && BC[x][y]->getA() == 0) {
@@ -390,8 +438,10 @@ bool kiemTraNuocDiChot(int x, int y, int xNew, int yNew, quanCo* BC[][8]) {
                     return 0;
             }
             else if (xNew - x == -1 && abs(yNew - y) == 1) {
-                if (BC[xNew][yNew]->kiemTraQuanCo() && BC[x][y]->kiemTraMau() == BC[xNew][yNew]->kiemTraMau())
-                    return 0;
+                if (x == 3 && BC[x][yNew]->kiemTraQuanCo() && BC[x][yNew]->getName() == 'C' && BC[x][yNew]->getA() == 1)
+                    return 1;
+                else if (!BC[xNew][yNew]->kiemTraQuanCo() || !BC[xNew][yNew]->kiemTraMau())
+                return 0;
             }
             else if (xNew - x == -2 && y == yNew && BC[x][y]->getA() == 0) {
                 if (BC[xNew][yNew]->kiemTraQuanCo())
@@ -405,17 +455,22 @@ bool kiemTraNuocDiChot(int x, int y, int xNew, int yNew, quanCo* BC[][8]) {
 }
 
 void diChuyenChot(int x, int y, int xNew, int yNew, quanCo* BC[][8]) {
-    if (BC[x][y]->getA() == 5 && kiemTraNuocDiChot(x, y, xNew, yNew, BC))
+    if (BC[x][y]->kiemTraMau() && kiemTraNuocDiChot(x, y, xNew, yNew, BC) && x == 6)
         phong(x, y, xNew, yNew, BC);
-    else if (kiemTraNuocDiChot(x, y, xNew, yNew, BC))
-        if (abs(xNew - x) == 2) {
-            BC[x][y]->setA(2);
-            setQuanCo(x, y, xNew, yNew, BC);
-        }
-        else {
-            BC[x][y]->setA(1);
-            setQuanCo(x, y, xNew, yNew, BC);
-        }
+    else if (!BC[x][y]->kiemTraMau() && kiemTraNuocDiChot(x, y, xNew, yNew, BC) && x == 1)
+        phong(x, y, xNew, yNew, BC);
+    else if (kiemTraNuocDiChot(x, y, xNew, yNew, BC) && BC[x][y]->kiemTraMau() && x == 4 && BC[x][yNew]->kiemTraQuanCo() && BC[x][yNew]->getName() == 'C' && BC[x][yNew]->getA() == 1) {
+        BC[x][y]->setA(1);
+        batChotQuaDuong(x, y, xNew, yNew, BC);
+    }
+    else if (kiemTraNuocDiChot(x, y, xNew, yNew, BC) && !BC[x][y]->kiemTraMau() && x == 3 && BC[x][yNew]->kiemTraQuanCo() && BC[x][yNew]->getName() == 'C' && BC[x][yNew]->getA() == 1) {
+        BC[x][y]->setA(1);
+        batChotQuaDuong(x, y, xNew, yNew, BC);
+    }
+    else if (kiemTraNuocDiChot(x, y, xNew, yNew, BC)){
+        BC[x][y]->setA(1);
+        setQuanCo(x, y, xNew, yNew, BC);
+    }
     else
         cout << "\n             khong the di chuyen\n";
 }
@@ -556,168 +611,130 @@ bool kiemTraNuocDiVua(int x, int y, int xNew, int yNew, quanCo* BC[][8]) {
 }
 
 void diChuyenVua(int x, int y, int xNew, int yNew, quanCo* BC[][8]) {
-    if (abs(yNew - y) == 2 && kiemTraNuocDiVua(x, y, xNew, yNew, BC) && kiemTraChieu(xNew, yNew, BC) && kiemTraChieu(x, y, BC)) {
-        BC[x][y]->setA(1);
-        nhapThanh(x, y, xNew, yNew, BC);
+    quanCo* A = NULL;
+    if (abs(yNew - y) == 2 && kiemTraNuocDiVua(x, y, xNew, yNew, BC) && kiemTraChieu(x, y, BC)) {
+        A = BC[xNew][yNew];
+        BC[xNew][yNew] = BC[x][y];
+        BC[x][y] = NULL;
+        if (kiemTraChieu(xNew, yNew, BC)) {
+            BC[x][y] = BC[xNew][yNew];
+            BC[xNew][yNew] = A;
+            A = NULL;
+            BC[x][y]->setA(1);
+            nhapThanh(x, y, xNew, yNew, BC);
+            return;
+        }
+        BC[x][y] = BC[xNew][yNew];
+        BC[xNew][yNew] = A;
+        A = NULL;
     }
-    else if (kiemTraNuocDiVua(x, y, xNew, yNew, BC) && kiemTraChieu(xNew,yNew,BC))
-        setQuanCo(x, y, xNew, yNew, BC);
+    else if (kiemTraNuocDiVua(x, y, xNew, yNew, BC)){
+        A = BC[xNew][yNew];
+        BC[xNew][yNew] = BC[x][y];
+        BC[x][y] = NULL;
+        if (kiemTraChieu(xNew, yNew, BC)) {
+            BC[x][y] = BC[xNew][yNew];
+            BC[xNew][yNew] = A;
+            A = NULL;
+            setQuanCo(x, y, xNew, yNew, BC);
+            return;
+        }
+        BC[x][y] = BC[xNew][yNew];
+        BC[xNew][yNew] = A;
+        A = NULL;
+    }
     else
         cout << "\n             khong the di chuyen\n";
 }
 
 bool kiemTraChieu(int x, int y, quanCo* BC[][8]) {
-    // Tren
-    for (int i = x; i >= 0; i--) {
+    for (int i = x - 1; i >= 0; i--) {
         if (BC[i][y]) {
-            if (BC[i][y]->getName() == 'H' || BC[i][y]->getName() == 'X') {
-                if (BC[i][y]->kiemTraMau() != BC[x][y]->kiemTraMau())
-                    return 0;
-            }
+            if ((BC[i][y]->getName() == 'X' || BC[i][y]->getName() == 'H') &&
+                BC[i][y]->kiemTraMau() != BC[x][y]->kiemTraMau())
+                return 0;
             break;
         }
     }
-
-    // Duoi
-    for (int i = x; i <= 7; i++) {
+    for (int i = x + 1; i < 8; i++) {
         if (BC[i][y]) {
-            if (BC[i][y]->getName() == 'H' || BC[i][y]->getName() == 'X') {
-                if (BC[i][y]->kiemTraMau() != BC[x][y]->kiemTraMau())
-                    return 0;
-            }
+            if ((BC[i][y]->getName() == 'X' || BC[i][y]->getName() == 'H') &&
+                BC[i][y]->kiemTraMau() != BC[x][y]->kiemTraMau())
+                return 0;
+            break;
+        }
+    }
+    for (int j = y - 1; j >= 0; j--) {
+        if (BC[x][j]) {
+            if ((BC[x][j]->getName() == 'X' || BC[x][j]->getName() == 'H') &&
+                BC[x][j]->kiemTraMau() != BC[x][y]->kiemTraMau())
+                return 0;
+            break;
+        }
+    }
+    for (int j = y + 1; j < 8; j++) {
+        if (BC[x][j]) {
+            if ((BC[x][j]->getName() == 'X' || BC[x][j]->getName() == 'H') &&
+                BC[x][j]->kiemTraMau() != BC[x][y]->kiemTraMau())
+                return 0;
             break;
         }
     }
 
-    // Phai
-    for (int i = y; i <= 7; i++) {
-        if (BC[x][i]) {
-            if (BC[x][i]->getName() == 'H' || BC[x][i]->getName() == 'X') {
-                if (BC[x][i]->kiemTraMau() != BC[x][y]->kiemTraMau())
-                    return 0;
-            }
-            break;
-        }
-    }
-
-    // Trai
-    for (int i = y; i >= 0; i--) {
-        if (BC[x][i]) {
-            if (BC[x][i]->getName() == 'H' || BC[x][i]->getName() == 'X') {
-                if (BC[x][i]->kiemTraMau() != BC[x][y]->kiemTraMau())
-                    return 0;
-            }
-            break;
-        }
-    }
-
-    // Tren trai
-    int i = x, j = y;
-    while (i > 0 && j > 0) {
-        i--;
-        j--;
+    for (int i = x - 1, j = y - 1; i >= 0 && j >= 0; i--, j--) {
         if (BC[i][j]) {
-            if (BC[i][j]->getName() == 'H' || BC[i][j]->getName() == 'T') {
-                if (BC[i][j]->kiemTraMau() != BC[x][y]->kiemTraMau())
-                    return 0;
-            }
+            if ((BC[i][j]->getName() == 'T' || BC[i][j]->getName() == 'H') &&
+                BC[i][j]->kiemTraMau() != BC[x][y]->kiemTraMau())
+                return 0;
             break;
         }
     }
-
-    // Tren phai
-    i = x, j = y;
-    while (i > 0 && j < 7) {
-        i--;
-        j++;
+    for (int i = x - 1, j = y + 1; i >= 0 && j < 8; i--, j++) {
         if (BC[i][j]) {
-            if (BC[i][j]->getName() == 'H' || BC[i][j]->getName() == 'T') {
-                if (BC[i][j]->kiemTraMau() != BC[x][y]->kiemTraMau())
-                    return 0;
-            }
+            if ((BC[i][j]->getName() == 'T' || BC[i][j]->getName() == 'H') &&
+                BC[i][j]->kiemTraMau() != BC[x][y]->kiemTraMau())
+                return 0;
             break;
         }
     }
-
-    // Duoi phai
-    i = x, j = y;
-    while (i < 7 && j < 7) {
-        i++;
-        j++;
+    for (int i = x + 1, j = y - 1; i < 8 && j >= 0; i++, j--) {
         if (BC[i][j]) {
-            if (BC[i][j]->getName() == 'H' || BC[i][j]->getName() == 'T') {
-                if (BC[i][j]->kiemTraMau() != BC[x][y]->kiemTraMau())
-                    return 0;
-            }
+            if ((BC[i][j]->getName() == 'T' || BC[i][j]->getName() == 'H') &&
+                BC[i][j]->kiemTraMau() != BC[x][y]->kiemTraMau())
+                return 0;
             break;
         }
     }
-
-    // Duoi trai
-    i = x, j = y;
-    while (i < 7 && j > 0) {
-        i++;
-        j--;
+    for (int i = x + 1, j = y + 1; i < 8 && j < 8; i++, j++) {
         if (BC[i][j]) {
-            if (BC[i][j]->getName() == 'H' || BC[i][j]->getName() == 'T') {
-                if (BC[i][j]->kiemTraMau() != BC[x][y]->kiemTraMau())
-                    return 0;
-            }
+            if ((BC[i][j]->getName() == 'T' || BC[i][j]->getName() == 'H') &&
+                BC[i][j]->kiemTraMau() != BC[x][y]->kiemTraMau())
+                return 0;
             break;
         }
     }
 
-    // Ma
-    for (int dx = -2; dx <= 2; dx++) {
-        for (int dy = -2; dy <= 2; dy++) {
-            if (abs(dx) + abs(dy) == 3) {
-                int newX = x + dx;
-                int newY = y + dy;
-                if (newX >= 0 && newX <= 7 && newY >= 0 && newY <= 7 && BC[newX][newY]) {
-                    if (BC[newX][newY]->getName() == 'M' && BC[newX][newY]->kiemTraMau() != BC[x][y]->kiemTraMau()) {
-                        return 0;
-                    }
-                }
-            }
-        }
+    int n[8][2] = { {-2, -1}, {-2, 1}, {2, -1}, {2, 1}, {-1, -2}, {1, -2}, {-1, 2}, {1, 2} };
+    for (int i = 0; i < 8; i++) {
+        int nx = x + n[i][0];
+        int ny = y + n[i][1];
+        if (nx >= 0 && nx < 8 && ny >= 0 && ny < 8 && BC[nx][ny] && BC[nx][ny]->getName() == 'M' &&
+            BC[nx][ny]->kiemTraMau() != BC[x][y]->kiemTraMau())
+            return 0;
     }
 
-    // Kiem tra vua
-    for (int dx = -1; dx <= 1; dx++) {
-        for (int dy = -1; dy <= 1; dy++) {
-            if (abs(dx) + abs(dy) == 1) {
-                int newX = x + dx;
-                int newY = y + dy;
-                if (newX >= 0 && newX <= 7 && newY >= 0 && newY <= 7 && BC[newX][newY]) {
-                    if (BC[newX][newY]->getName() == 'V' && BC[newX][newY]->kiemTraMau() != BC[x][y]->kiemTraMau()) {
-                        return 0;
-                    }
-                }
-            }
-        }
+    int m = BC[x][y]->kiemTraMau() ? 1 : -1;
+    if (x + m >= 0 && x + m < 8) {
+        if (y - 1 >= 0 && BC[x + m][y - 1] &&
+            BC[x + m][y - 1]->getName() == 'C' &&
+            BC[x + m][y - 1]->kiemTraMau() != BC[x][y]->kiemTraMau())
+            return 0;
+        if (y + 1 < 8 && BC[x + m][y + 1] &&
+            BC[x + m][y + 1]->getName() == 'C' &&
+            BC[x + m][y + 1]->kiemTraMau() != BC[x][y]->kiemTraMau())
+            return 0;
     }
 
-    // Kiem tra chot
-    if (BC[x][y]->kiemTraMau()) {
-        if (x + 1 <= 7) {
-            if(BC[x + 1][y - 1])
-                if (y - 1 >= 0 && BC[x + 1][y - 1]->getName() == 'C' && BC[x + 1][y - 1]->kiemTraMau() != BC[x][y]->kiemTraMau())
-                    return 0;
-            if(BC[x + 1][y + 1])
-                if (y + 1 <= 7 && BC[x + 1][y + 1]->getName() == 'C' && BC[x + 1][y + 1]->kiemTraMau() != BC[x][y]->kiemTraMau())
-                    return 0;
-        }
-    }
-    else {
-        if (x - 1 >= 0) {
-            if (BC[x - 1][y - 1])
-                if (y - 1 >= 0 && BC[x - 1][y - 1]->getName() == 'V' && BC[x - 1][y - 1]->kiemTraMau() != BC[x][y]->kiemTraMau())
-                    return 0;
-            if (BC[x - 1][y + 1])
-                if (y + 1 <= 7 && BC[x - 1][y + 1]->getName() == 'V' && BC[x - 1][y + 1]->kiemTraMau() != BC[x][y]->kiemTraMau())
-                    return 0;
-        }
-    }
     return 1;
 }
 
