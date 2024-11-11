@@ -648,6 +648,7 @@ void diChuyenVua(int x, int y, int xNew, int yNew, quanCo* BC[][8]) {
 }
 
 bool kiemTraChieu(int x, int y, quanCo* BC[][8]) {
+     // xe hau
     for (int i = x - 1; i >= 0; i--) {
         if (BC[i][y]) {
             if ((BC[i][y]->getName() == 'X' || BC[i][y]->getName() == 'H') &&
@@ -681,6 +682,7 @@ bool kiemTraChieu(int x, int y, quanCo* BC[][8]) {
         }
     }
 
+    //tuong hau
     for (int i = x - 1, j = y - 1; i >= 0 && j >= 0; i--, j--) {
         if (BC[i][j]) {
             if ((BC[i][j]->getName() == 'T' || BC[i][j]->getName() == 'H') &&
@@ -714,6 +716,7 @@ bool kiemTraChieu(int x, int y, quanCo* BC[][8]) {
         }
     }
 
+    //ma
     int n[8][2] = { {-2, -1}, {-2, 1}, {2, -1}, {2, 1}, {-1, -2}, {1, -2}, {-1, 2}, {1, 2} };
     for (int i = 0; i < 8; i++) {
         int nx = x + n[i][0];
@@ -723,6 +726,7 @@ bool kiemTraChieu(int x, int y, quanCo* BC[][8]) {
             return 0;
     }
 
+    //chot
     int m = BC[x][y]->kiemTraMau() ? 1 : -1;
     if (x + m >= 0 && x + m < 8) {
         if (y - 1 >= 0 && BC[x + m][y - 1] &&
@@ -796,4 +800,99 @@ void setConsoleTextColor(int text) {
     GetConsoleScreenBufferInfo(hConsole, &consoleInfo);
     int newColor = (consoleInfo.wAttributes & 0xF0) | text;
     SetConsoleTextAttribute(hConsole, newColor);
+}
+
+bool kiemTraChieuBi(int x, int y, quanCo* BC[][8]) {
+    // xe hau
+    for (int i = x - 1; i >= 0; i--) {
+        if (BC[i][y]) {
+            if ((BC[i][y]->getName() == 'X' || BC[i][y]->getName() == 'H') &&
+                BC[i][y]->kiemTraMau() != BC[x][y]->kiemTraMau())
+                return 0;
+            break;
+        }
+    }
+    for (int i = x + 1; i < 8; i++) {
+        if (BC[i][y]) {
+            if ((BC[i][y]->getName() == 'X' || BC[i][y]->getName() == 'H') &&
+                BC[i][y]->kiemTraMau() != BC[x][y]->kiemTraMau())
+                return 0;
+            break;
+        }
+    }
+    for (int j = y - 1; j >= 0; j--) {
+        if (BC[x][j]) {
+            if ((BC[x][j]->getName() == 'X' || BC[x][j]->getName() == 'H') &&
+                BC[x][j]->kiemTraMau() != BC[x][y]->kiemTraMau())
+                return 0;
+            break;
+        }
+    }
+    for (int j = y + 1; j < 8; j++) {
+        if (BC[x][j]) {
+            if ((BC[x][j]->getName() == 'X' || BC[x][j]->getName() == 'H') &&
+                BC[x][j]->kiemTraMau() != BC[x][y]->kiemTraMau())
+                return 0;
+            break;
+        }
+    }
+
+    //tuong hau
+    for (int i = x - 1, j = y - 1; i >= 0 && j >= 0; i--, j--) {
+        if (BC[i][j]) {
+            if ((BC[i][j]->getName() == 'T' || BC[i][j]->getName() == 'H') &&
+                BC[i][j]->kiemTraMau() != BC[x][y]->kiemTraMau())
+                return 0;
+            break;
+        }
+    }
+    for (int i = x - 1, j = y + 1; i >= 0 && j < 8; i--, j++) {
+        if (BC[i][j]) {
+            if ((BC[i][j]->getName() == 'T' || BC[i][j]->getName() == 'H') &&
+                BC[i][j]->kiemTraMau() != BC[x][y]->kiemTraMau())
+                return 0;
+            break;
+        }
+    }
+    for (int i = x + 1, j = y - 1; i < 8 && j >= 0; i++, j--) {
+        if (BC[i][j]) {
+            if ((BC[i][j]->getName() == 'T' || BC[i][j]->getName() == 'H') &&
+                BC[i][j]->kiemTraMau() != BC[x][y]->kiemTraMau())
+                return 0;
+            break;
+        }
+    }
+    for (int i = x + 1, j = y + 1; i < 8 && j < 8; i++, j++) {
+        if (BC[i][j]) {
+            if ((BC[i][j]->getName() == 'T' || BC[i][j]->getName() == 'H') &&
+                BC[i][j]->kiemTraMau() != BC[x][y]->kiemTraMau())
+                return 0;
+            break;
+        }
+    }
+
+    //ma
+    int n[8][2] = { {-2, -1}, {-2, 1}, {2, -1}, {2, 1}, {-1, -2}, {1, -2}, {-1, 2}, {1, 2} };
+    for (int i = 0; i < 8; i++) {
+        int nx = x + n[i][0];
+        int ny = y + n[i][1];
+        if (nx >= 0 && nx < 8 && ny >= 0 && ny < 8 && BC[nx][ny] && BC[nx][ny]->getName() == 'M' &&
+            BC[nx][ny]->kiemTraMau() != BC[x][y]->kiemTraMau())
+            return 0;
+    }
+
+    //chot
+    int m = BC[x][y]->kiemTraMau() ? 1 : -1;
+    if (x + m >= 0 && x + m < 8) {
+        if (y - 1 >= 0 && BC[x + m][y - 1] &&
+            BC[x + m][y - 1]->getName() == 'C' &&
+            BC[x + m][y - 1]->kiemTraMau() != BC[x][y]->kiemTraMau())
+            return 0;
+        if (y + 1 < 8 && BC[x + m][y + 1] &&
+            BC[x + m][y + 1]->getName() == 'C' &&
+            BC[x + m][y + 1]->kiemTraMau() != BC[x][y]->kiemTraMau())
+            return 0;
+    }
+
+    return 1;
 }
