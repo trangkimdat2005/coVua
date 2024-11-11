@@ -31,8 +31,3 @@ bool kiemTraChieuBi(int x, int y, quanCo* BC[][8]);
 void timVua(int& xv, int& yv, bool luot, quanCo* BC[][8]);
 void setConsoleTextColor(int text);
 void setConsoleBackgroundColor(int background);
-void setConsoleFontSize(int fontSize);
-void setConsoleIcon(const wchar_t* iconPath);
-void SetWindowSize(SHORT width, SHORT height);
-void SetConsoleHeight(int height);
-void SetScreenBufferSize(SHORT width, SHORT height);
