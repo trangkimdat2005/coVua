@@ -1,16 +1,16 @@
 #pragma once
 #include "quanCo.h"
 
-bool quanCo::kiemTraMau() {
-    return mau;
-}
-
 quanCo::quanCo() {
     mau = 0;
 }
 
 quanCo::quanCo(bool mau): mau(mau) {
     this->mau = mau;
+}
+
+bool quanCo::kiemTraMau() const {
+    return mau;
 }
 
 bool quanCo::kiemTraQuanCo() {

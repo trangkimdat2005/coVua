@@ -6,7 +6,7 @@ private:
     bool mau;
 public:
     friend class banCo;
-    bool kiemTraMau();
+    bool kiemTraMau() const;
     void setMau(int x);
     bool kiemTraQuanCo();
     quanCo();
