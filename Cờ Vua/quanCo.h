@@ -11,7 +11,7 @@ public:
     bool kiemTraQuanCo();
     quanCo();
     quanCo(bool mau);
-    ~quanCo() {};
+    virtual ~quanCo() {};
     virtual char getName() = 0;
     virtual void setA(int x) = 0;
     virtual int getA() = 0;
@@ -26,6 +26,7 @@ public:
     chot(bool mau) : quanCo(mau){}
     void setA(int x);
     int getA();
+    ~chot() {};
 };
 
 class xe :public quanCo {
@@ -37,6 +38,7 @@ public:
     void setA(int x);
     int getA();
     xe(bool mau) : quanCo(mau) {}
+    ~xe() {};
 };
 
 class ma :public quanCo {
@@ -47,6 +49,7 @@ public:
     ma(bool mau) : quanCo(mau) {}
     void setA(int x){}
     int getA() { return 1; }
+    ~ma() {};
 };
 
 class tuong :public quanCo {
@@ -57,6 +60,7 @@ public:
     tuong(bool mau) : quanCo(mau) {}
     void setA(int x){}
     int getA() { return 1; }
+    ~tuong() {};
 };
 
 class hau :public quanCo {
@@ -67,6 +71,7 @@ public:
     hau(bool mau) : quanCo(mau) {}
     void setA(int x){}
     int getA() { return 1; }
+    ~hau() {};
 };
 
 class vua :public quanCo {
@@ -78,4 +83,5 @@ public:
     vua(bool mau) : quanCo(mau) {}
     void setA(int x);
     int getA();
+    ~vua() {};
 };
