@@ -634,7 +634,7 @@ bool kiemTraNuocDi(int x, int y, int xNew, int yNew, quanCo* BC[][8]) {
     else return 0;
 }
 
-void diChuyen(int x, char y, int& xv, int& yv, bool luot, int xNew, char yNew, int& xd, char& yd, quanCo*& A, quanCo* BC[][8]) {
+void diChuyen(int& x, char& y, int& xv, int& yv, bool luot, int xNew, char yNew, int& xd, char& yd, quanCo*& A, quanCo* BC[][8]) {
     ofstream of;
     of.open("vanCo.txt", ios::app);
 
@@ -651,7 +651,7 @@ void diChuyen(int x, char y, int& xv, int& yv, bool luot, int xNew, char yNew, i
             timVua(xv, yv, luot, BC);
 
             do {
-                xuatBC(BC);
+                xuatBCDaDiChuyen(xd, yd, BC);
                 (kiemTraChieu(xv, yv, BC)) ? cout << "\nkhong the di chuyen\n" : cout << "\nQuan vua cua ban dang bi chieu\n";
 
                 cout << "\nmoi ban chon lai quan muon di chuyen: ";
@@ -690,7 +690,7 @@ void diChuyen(int x, char y, int& xv, int& yv, bool luot, int xNew, char yNew, i
 
                 while (yNew == '0' && xNew == 0) {
 
-                    xuatBCBinhThuong(BC);
+                    xuatBCDaDiChuyen(xd, yd, BC);
 
                     cout << "\nmoi ban chon lai quan muon di chuyen: ";
                     cin >> y >> x;

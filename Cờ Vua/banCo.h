@@ -16,7 +16,7 @@ void nhapThanh(int x, int y, int xNew, int yNew, quanCo* BC[][8]);
 void phong(int x, int y, int xNew, int yNew, quanCo* BC[][8]);
 void batChotQuaDuong(int x, int y, int xNew, int yNew, quanCo*& A, quanCo* BC[][8]);
 bool kiemTraNuocDi(int x, int y, int xNew, int yNew, quanCo* BC[][8]);
-void diChuyen(int x, char y, int& xv, int& yv, bool luot, int xNew, char yNew, int& xd, char& yd, quanCo*& A, quanCo* BC[][8]);
+void diChuyen(int& x, char& y, int& xv, int& yv, bool luot, int xNew, char yNew, int& xd, char& yd, quanCo*& A, quanCo* BC[][8]);
 bool kiemTraNuocDiChot(int x, int y, int xNew, int yNew, quanCo* BC[][8]);
 bool kiemTraNuocDiXe(int x, int y, int xNew, int yNew, quanCo* BC[][8]);
 bool kiemTraNuocDiMa(int x, int y, int xNew, int yNew, quanCo* BC[][8]);

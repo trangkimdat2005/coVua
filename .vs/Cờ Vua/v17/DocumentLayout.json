@@ -3,12 +3,12 @@
   "WorkspaceRootPath": "D:\\code\\C\u1EDD Vua - version 18\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{F8BEB8A6-96A5-4A30-821B-95B4CAAE7489}|C\u1EDD Vua\\C\u1EDD Vua.vcxproj|D:\\code\\C\u1EDD Vua - version 18\\C\u1EDD Vua\\banCo.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{F8BEB8A6-96A5-4A30-821B-95B4CAAE7489}|C\u1EDD Vua\\C\u1EDD Vua.vcxproj|solutionrelative:C\u1EDD Vua\\banCo.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{F8BEB8A6-96A5-4A30-821B-95B4CAAE7489}|C\u1EDD Vua\\C\u1EDD Vua.vcxproj|D:\\code\\C\u1EDD Vua - version 18\\C\u1EDD Vua\\banCo.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{F8BEB8A6-96A5-4A30-821B-95B4CAAE7489}|C\u1EDD Vua\\C\u1EDD Vua.vcxproj|solutionrelative:C\u1EDD Vua\\banCo.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F8BEB8A6-96A5-4A30-821B-95B4CAAE7489}|C\u1EDD Vua\\C\u1EDD Vua.vcxproj|D:\\code\\C\u1EDD Vua - version 18\\C\u1EDD Vua\\banCo.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{F8BEB8A6-96A5-4A30-821B-95B4CAAE7489}|C\u1EDD Vua\\C\u1EDD Vua.vcxproj|solutionrelative:C\u1EDD Vua\\banCo.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{F8BEB8A6-96A5-4A30-821B-95B4CAAE7489}|C\u1EDD Vua\\C\u1EDD Vua.vcxproj|D:\\code\\C\u1EDD Vua - version 18\\C\u1EDD Vua\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
@@ -30,7 +30,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Document",
@@ -40,9 +40,10 @@
               "RelativeDocumentMoniker": "C\u1EDD Vua\\main.cpp",
               "ToolTip": "D:\\code\\C\u1EDD Vua - version 18\\C\u1EDD Vua\\main.cpp",
               "RelativeToolTip": "C\u1EDD Vua\\main.cpp",
-              "ViewState": "AgIAABIAAAAAAAAAAAAAACYAAAA6AAAAAAAAAA==",
+              "ViewState": "AgIAAIcAAAAAAAAAAAAAAJkAAAAaAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-10-18T15:26:15.733Z"
+              "WhenOpened": "2024-10-18T15:26:15.733Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -54,7 +55,8 @@
               "RelativeToolTip": "C\u1EDD Vua\\quanCo.h",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAZAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-10-19T08:51:50.712Z"
+              "WhenOpened": "2024-10-19T08:51:50.712Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -66,29 +68,31 @@
               "RelativeToolTip": "C\u1EDD Vua\\quanCo.cpp",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-10-18T15:52:32.77Z"
+              "WhenOpened": "2024-10-18T15:52:32.77Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "banCo.h",
               "DocumentMoniker": "D:\\code\\C\u1EDD Vua - version 18\\C\u1EDD Vua\\banCo.h",
               "RelativeDocumentMoniker": "C\u1EDD Vua\\banCo.h",
               "ToolTip": "D:\\code\\C\u1EDD Vua - version 18\\C\u1EDD Vua\\banCo.h",
               "RelativeToolTip": "C\u1EDD Vua\\banCo.h",
-              "ViewState": "AgIAABgAAAAAAAAAAAAAACAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAAA8AAAA+AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-10-21T13:07:14.784Z"
+              "WhenOpened": "2024-10-21T13:07:14.784Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "banCo.cpp",
               "DocumentMoniker": "D:\\code\\C\u1EDD Vua - version 18\\C\u1EDD Vua\\banCo.cpp",
               "RelativeDocumentMoniker": "C\u1EDD Vua\\banCo.cpp",
               "ToolTip": "D:\\code\\C\u1EDD Vua - version 18\\C\u1EDD Vua\\banCo.cpp",
               "RelativeToolTip": "C\u1EDD Vua\\banCo.cpp",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAIcBAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAFYCAAAAAAAAAAAAAHwCAAAdAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-10-18T15:23:34.899Z",
               "EditorCaption": ""

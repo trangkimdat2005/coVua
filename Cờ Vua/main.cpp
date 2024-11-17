@@ -29,6 +29,7 @@ int main() {
 
 	} while (1);
 	xuatBC(BC);
+
 	(luot) ? cout << "\n                luot quan trang\n" : cout << "\n                luot quan den\n";
 
 	while (1) {
@@ -95,7 +96,7 @@ int main() {
 
 			while (yNew == '0' && xNew == 0) {
 				
-				xuatBCBinhThuong(BC);
+				xuatBCDaDiChuyen(xd, yd, BC);
 
 				cout << "\nmoi ban chon lai quan muon di chuyen: ";
 				cin >> y >> x;
